@@ -27,7 +27,7 @@ ostream &operator<<(ostream &output, const user &u)                     //重载
     return output << u.uid << " " << u.name;
 }
 
-void doLogin(ffsuid_t uid)
+void doLogin(ffsuid_t uid)                                              //将登录的用户加入到文件    
 {
     ofstream(currentUserFilePath) << uid;
 }
@@ -47,7 +47,7 @@ int login(int argc, char *argv[])
     return 0;
 }
 
-bool hasUserInit()
+bool hasUserInit()                                                       
 {
     return fs::exists(userListFilePath) && fs::exists(currentUserFilePath);
 }
@@ -85,10 +85,16 @@ user getUser(ffsuid_t uid)
     ifstream users(userListFilePath);
     user u;
     
-    while ( users >> u ) {
+    while ( users >> u.uid ) {
         
-        if ( u.uid == uid )
+        if ( u.uid == uid ) {
+        
+            users >> u.name;
             return u;
+        
+        }
+
+        users >> u.name;
     
     }
 
@@ -102,9 +108,11 @@ user getUser(string name)
     ifstream users(userListFilePath);
     user u;
 
-    while ( users >> u ) {
+    while ( users >> u.uid ) {
 
-        if (u.name == name)
+        users >> u.name;
+        
+        if ( u.name == name )
             return u;
 
     }
@@ -132,10 +140,13 @@ int adduser(int argc, char *argv[])
     user u;
     ffsuid_t lastUid = 0;
 
-    while ( users >> u ) {
+    while ( users >> u.uid ) {
+
+        users >> u.name;
 
         if ( u.name == argv[0] )
             throw runtime_error("user already exists.");
+        
         lastUid = u.uid;
 
     }
