@@ -40,30 +40,33 @@ int main(int argc, char *argv[])
     int cmdArgc = 0;
     char **cmdArgv = nullptr;
 
-    if (argc > 1)
-    {
+    if ( argc > 1 ) {
+
         command = string(argv[1]);
         cmdArgc = argc - 2;
         cmdArgv = argv + 2;
+    
     }
 
-    for (auto &c : validCommands)
-    {
-        if (c.command == command)
-        {
-            if (command != initCommand.command && command != helpCommand.command && !hasInit())
-            {
+    for ( auto &c : validCommands ) {
+
+        if ( c.command == command ) {
+
+            if ( command != initCommand.command && command != helpCommand.command && !hasInit() ) {
+
                 cerr << "ERROR: 未找到文件系统" << endl;
                 return 2;
+            
             }
 
-            try
-            {
+            try {
+
                 return c.entry(cmdArgc, cmdArgv);
             }
-            catch (const exception &e)
-            {
-                std::cerr << "ERROR: " << e.what() << endl;
+            
+            catch ( const exception &e ) {
+                
+                cerr << "ERROR: " << e.what() << endl;
                 return 3;
             }
         }

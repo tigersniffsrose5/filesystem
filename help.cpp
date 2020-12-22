@@ -7,7 +7,7 @@
 
 using namespace std;
 
-map<string, string> helpText{
+map<string, string> helpText {
     {"help",
 R"(基于文件的模拟文件系统
 
@@ -110,20 +110,25 @@ R"(更改文件的所有者
 int help(int argc, char *argv[])
 {
     string cmd = "help";
-    if (argc > 0)
-    {
+
+    if ( argc > 0 ) {
+       
         cmd = argv[0];
+    
     }
 
-    try
-    {
+    try {
+
         cout << helpText.at(cmd) << endl;
+    
     }
-    catch (const out_of_range &e)
-    {
+
+    catch ( const out_of_range &e ) {
+
         stringstream errMsg;
         errMsg << "未找到" << cmd << "的帮助。";
         throw out_of_range(errMsg.str());
+    
     }
 
     return 0;
