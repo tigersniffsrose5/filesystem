@@ -18,7 +18,7 @@ constexpr int defaultUserUID = 1;
 
 istream &operator>>(istream &input, user &u)                            //重载>>
 {
-    input >> u.uid;
+    input >> u.uid >> ws;                                               //忽略空格
     return getline(input, u.name);
 }
 

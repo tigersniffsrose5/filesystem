@@ -91,6 +91,7 @@ class filePermission
     const permission &other() const { return this->otherPermission; }
 };
 
+struct fileMetadataPresistent;
 class fileMetadata
 {
   private:

@@ -30,6 +30,7 @@ class otherTarget : public changeTarget
     static otherTarget instance;
 };
 
+class modeChangeOperation;
 class modeChange
 {
   public:

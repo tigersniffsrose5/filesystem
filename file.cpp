@@ -129,7 +129,7 @@ void fileMetadata::ensureOwnership(ffsuid_t currentUid)
 fstream file::openStream()
 {
     fstream s(path(), ios::binary | ios::in | ios::out);
-    s.seekg(fileMetadataSize);
+    s.seekg(fileMetadataSize);                                                      //将文件定位在4
     s.seekp(fileMetadataSize);
 
     if ( !s )
