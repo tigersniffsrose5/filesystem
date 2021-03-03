@@ -9,6 +9,7 @@ make
 ```
 # 使用
 ```
+cd build/bin
 ./ffs help 查看功能描述
 ```
 
